@@ -29,7 +29,8 @@
         "max": 2,
         "maxEOF": 1
       }
-    ]
+    ],
+    "react/jsx-props-no-spreading":["off"]
   },
   "globals": {
     "fetch": false,
