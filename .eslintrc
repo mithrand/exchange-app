@@ -1,0 +1,35 @@
+{
+  "parserOptions": { 
+    "project": "./tsconfig.json"
+  },
+  "extends": [
+    "airbnb",
+    "airbnb-typescript"
+  ],
+  "plugins": [],
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true 
+  },
+  "rules": {
+    "semi": 2,
+    "complexity": [2, 8],
+    "max-len": [2, 120],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 2,
+        "maxEOF": 1
+      }
+    ]
+  },
+  "globals": {
+    "fetch": false,
+    "Iterator": true,
+    "Generator": true,
+    "browser": true,
+    "$": true,
+    "$$": true
+  }
+}
