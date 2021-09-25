@@ -1,5 +1,6 @@
 export const colors = {
   black: '#191c1f',
+  blue: '#0666eb',
 };
 
 export const fontFamily = {
@@ -7,6 +8,7 @@ export const fontFamily = {
 };
 
 export const fontSizes = {
+  small: '0.75rem',
   medium: '1rem',
 };
 
