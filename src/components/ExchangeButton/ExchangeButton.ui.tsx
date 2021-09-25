@@ -9,10 +9,10 @@ import Balance from './Balance.ui';
 import QuantityInput from './QuantityInput.ui';
 import Message from './Message.ui';
 
-import { CurrencyAccount } from '../../types';
+import { Account } from '../../types';
 
 export interface Props {
-  currencyAccount: CurrencyAccount;
+  currencyAccount: Account;
   quantity?: number;
   message?: string;
   onCurrencyButtonClick(): void;
