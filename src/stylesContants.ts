@@ -13,7 +13,7 @@ export const fontSizes = {
 };
 
 export const margin = {
-  normal: '0px 0px 5px 5px',
+  normal: '0 0 0.5rem 1rem',
 };
 
 export const backgroundColors = {
