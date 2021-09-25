@@ -12,6 +12,7 @@ import currencies from '../data/currencies';
 
 const exchangeButtonPropsA: ExchangeButtonProps = {
   currencyAccount: {
+    id: '',
     currency: currencies.GBP,
     balance: 10000.578,
   },
@@ -23,6 +24,7 @@ const exchangeButtonPropsA: ExchangeButtonProps = {
 
 const exchangeButtonPropsB: ExchangeButtonProps = {
   currencyAccount: {
+    id: '',
     currency: currencies.EUR,
     balance: 150.999,
   },
