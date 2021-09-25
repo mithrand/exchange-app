@@ -8,6 +8,7 @@ import ExchangeButton, { Props } from './ExchangeButton.container';
 describe('ExchangeButton', () => {
   const props: Props = {
     currencyAccount: {
+      id: '12345',
       currency: currencies.GBP,
       balance: 10000.578,
     },

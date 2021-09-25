@@ -32,8 +32,10 @@
     "operator-linebreak": ["off"],
     "no-empty-pattern": ["off"],
     "no-alert": ["off"],
-    "react/require-default-props":["off"],
-    "@typescript-eslint/dot-notation":["off"]
+    "react/require-default-props": ["off"],
+    "@typescript-eslint/dot-notation": ["off"],
+    "no-confusing-arrow": ["off"],
+    "function-paren-newline": ["off"]
   },
   "globals": {
     "fetch": false,

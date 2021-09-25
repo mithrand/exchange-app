@@ -12,7 +12,13 @@ export interface Currency {
   name: string;
 }
 
+export interface GenericAction {
+  type: string;
+  payload: any;
+}
+
 export interface Account {
+  id: string;
   currency: Currency;
   balance: number;
 }

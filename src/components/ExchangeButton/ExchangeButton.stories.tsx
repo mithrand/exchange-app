@@ -16,6 +16,7 @@ const Template: ComponentStory<typeof ExchangeButton> = (args) => (
 export const Primary = Template.bind({});
 Primary.args = {
   currencyAccount: {
+    id: '12345',
     currency: currencies.GBP,
     balance: 15214.561,
   },
