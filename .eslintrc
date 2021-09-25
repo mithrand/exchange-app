@@ -32,7 +32,8 @@
     ],
     "react/jsx-props-no-spreading":["off"],
     "implicit-arrow-linebreak":["off"],
-    "operator-linebreak":["off"]
+    "operator-linebreak":["off"],
+    "no-empty-pattern": ["off"]
   },
   "globals": {
     "fetch": false,
