@@ -38,7 +38,7 @@ describe('Account reducer', () => {
     const account = initialState.accounts[1];
     const action = setAccountFrom(account.id);
     const finalState = reducer(initialState, action);
-    expect(finalState.from).toBe(account);
+    expect(finalState.from).toBe(account.id);
   });
 
   it('do not setAccountFrom for non existing accounts', async () => {
@@ -51,7 +51,7 @@ describe('Account reducer', () => {
     const account = initialState.accounts[2];
     const action = setAccountTo(account.id);
     const finalState = reducer(initialState, action);
-    expect(finalState.to).toBe(account);
+    expect(finalState.to).toBe(account.id);
   });
 
   it('do not setAccountTo for non existing accounts', async () => {
