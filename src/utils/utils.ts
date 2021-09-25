@@ -6,3 +6,7 @@ export const getCurrencyShort = (currency: Currency) =>
 export const printCurrency =
   (precision: number) => (currency: Currency) => (value: number) =>
     `${value.toFixed(precision).toString().replace('.', ',')} ${getCurrencyShort(currency)}`;
+
+export const printQuantity =
+    (precision: number) => (value: number) =>
+      `${value.toFixed(precision).toString().replace('.', ',')}`;

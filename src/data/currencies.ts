@@ -1,6 +1,8 @@
 import { Currency } from '../types';
 
-const currencies: Record<string, Currency> = {
+type CurrencyIndex = 'GBP' | 'EUR' | 'USD';
+
+const currencies: Record<CurrencyIndex, Currency> = {
   EUR: {
     symbol: '€',
     code: 'EUR',

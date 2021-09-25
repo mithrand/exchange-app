@@ -3,3 +3,9 @@ export interface Currency {
   code: string,
   name: string,
 }
+
+export interface CurrencyAccount {
+  currency: Currency,
+  balance: number,
+}
+
