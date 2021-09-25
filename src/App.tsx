@@ -1,6 +1,12 @@
 import React from 'react';
 
-const App = () => <div>Hello world</div>;
+import Title from './components/Title';
+
+const App = () => (
+  <>
+    <Title>Sell GBP</Title>
+    <div>Hello world</div>
+  </>
+);
 
 export default App;
-
