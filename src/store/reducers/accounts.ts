@@ -5,8 +5,8 @@ import currencies from '../../data/currencies';
 
 export interface AccountsState {
   accounts: Account[];
-  from: Account;
-  to: Account;
+  from: Account['id'];
+  to: Account['id'];
 }
 
 const accounts = [
@@ -29,8 +29,8 @@ const accounts = [
 
 export const initialState: AccountsState = {
   accounts,
-  from: accounts[0],
-  to: accounts[1],
+  from: accounts[0].id,
+  to: accounts[1].id,
 };
 
 const addBalanceToAccount = (
@@ -85,14 +85,15 @@ const reducers = {
   ): AccountsState => ({
     ...state,
     from:
-      state.accounts.find((account) => account.id === accountId) || state.from,
+      state.accounts.find((account) => account.id === accountId)?.id ||
+      state.from,
   }),
   [ACTIONS_TYPES.SET_ACCOUNT_TO]: (
     state: AccountsState,
     { accountId }: { accountId: Account['id'] },
   ): AccountsState => ({
     ...state,
-    to: state.accounts.find((account) => account.id === accountId) || state.to,
+    to: state.accounts.find((account) => account.id === accountId)?.id || state.to,
   }),
   default: (state: AccountsState) => state,
 };
