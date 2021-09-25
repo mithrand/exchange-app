@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
-import accounts from './accounts';
+import accounts, { AccountsState } from './accounts';
+
+export interface RootReducer {
+  accountsData: AccountsState;
+}
 
 const reducers = combineReducers({
-  accounts,
+  accountsData: accounts,
 });
 
 export default reducers;
