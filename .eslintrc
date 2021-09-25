@@ -1,16 +1,13 @@
 {
-  "parserOptions": { 
+  "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "extends": [
-    "airbnb",
-    "airbnb-typescript"
-  ],
+  "extends": ["airbnb", "airbnb-typescript"],
   "plugins": [],
   "env": {
     "es6": true,
     "node": true,
-    "jest": true 
+    "jest": true
   },
   "rules": {
     "semi": 2,
@@ -30,10 +27,12 @@
         "maxEOF": 1
       }
     ],
-    "react/jsx-props-no-spreading":["off"],
-    "implicit-arrow-linebreak":["off"],
-    "operator-linebreak":["off"],
-    "no-empty-pattern": ["off"]
+    "react/jsx-props-no-spreading": ["off"],
+    "implicit-arrow-linebreak": ["off"],
+    "operator-linebreak": ["off"],
+    "no-empty-pattern": ["off"],
+    "no-alert": ["off"],
+    "react/require-default-props":["off"]
   },
   "globals": {
     "fetch": false,

@@ -1,9 +1,12 @@
 import React from 'react';
 
-import ExchangeButton from './ExchangeButton.ui';
+import ExchangeButton, {
+  Props as ExchangeButtonProps,
+} from './ExchangeButton.ui';
 
-interface Props {}
 
-const ExchangeButtonContainer = ({}: Props) => <ExchangeButton />;
+export interface Props extends ExchangeButtonProps {}
+
+export const ExchangeButtonContainer = (props: Props) => <ExchangeButton {...props} />;
 
 export default ExchangeButtonContainer;

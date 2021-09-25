@@ -11,7 +11,7 @@ interface Props {
 }
 
 const titleCss = css({
-  fontsize: styles.fontSizes.medium,
+  fontSize: styles.fontSizes.big,
   fontFamily: styles.fontFamily.main,
   color: styles.colors.black,
   margin: styles.margin.normal,

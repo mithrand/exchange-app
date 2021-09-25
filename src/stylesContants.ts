@@ -1,6 +1,9 @@
 export const colors = {
   black: '#191c1f',
   blue: '#0666eb',
+  white: '#ffffff',
+  grey: '#b7b7b7',
+  red: '#f76565',
 };
 
 export const fontFamily = {
@@ -10,12 +13,14 @@ export const fontFamily = {
 export const fontSizes = {
   small: '0.75rem',
   medium: '1rem',
+  big: '1.5rem',
 };
 
 export const margin = {
-  normal: '0 0 0.5rem 1rem',
+  normal: '0.5rem 1rem 0.5rem 1rem',
 };
 
 export const backgroundColors = {
   grey: '#f7f7f7',
+  greyDark: '#f8f8f8',
 };
