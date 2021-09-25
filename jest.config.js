@@ -21,7 +21,9 @@ module.exports = {
   ],
   coveragePathIgnorePatterns: [
     '__stories__',
-    'index.ts'
+    'index.ts',
+    'stories.ts',
+    'stories.tsx'
   ],
   coverageDirectory: '<rootDir>/coverage',
   transform: {

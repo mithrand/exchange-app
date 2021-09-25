@@ -3,8 +3,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const common = require('./webpack.common');
 const packageJson = require('../package.json');
+
 
 module.exports = () => (
   merge(common, {
@@ -26,6 +29,10 @@ module.exports = () => (
           process.cwd(),
           'bundle-analyzer-report.html',
         ),
+      }),
+      new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, 'index.html'),
+        filename: 'index.html',
       }),
     ],
   })
