@@ -6,10 +6,10 @@ import { css, jsx } from '@emotion/react';
 import { printCurrency } from '../../utils';
 import * as styles from '../../stylesContants';
 
-import { CurrencyAccount } from '../../types';
+import { Account } from '../../types';
 
 interface Props {
-  currencyAccount: CurrencyAccount;
+  currencyAccount: Account;
 }
 
 const BALANCE_PRECISION = 2;
