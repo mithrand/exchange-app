@@ -5,9 +5,8 @@ import ExchangeRate from './components/ExchangeRate';
 
 const App = () => (
   <>
-    <Title>Sell GBP</Title>
-    <ExchangeRate />
-    <div>Hello world</div>
+    <Title data-testid="title">Sell GBP</Title>
+    <ExchangeRate data-testid="exchange-rate" />
   </>
 );
 

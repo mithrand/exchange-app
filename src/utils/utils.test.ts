@@ -27,6 +27,6 @@ describe('utils', () => {
     const precision = 5;
     const value = 1.1234567;
 
-    expect(printCurrency(precision)(currency)(value)).toBe('1.12346 $');
+    expect(printCurrency(precision)(currency)(value)).toBe('1,12346 $');
   });
 });
