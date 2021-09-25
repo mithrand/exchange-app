@@ -6,7 +6,7 @@ import currencies from '../../data/currencies';
 
 
 export default {
-  title: 'Example/ExchangeRate',
+  title: 'Components/ExchangeRate',
   component: ExchangeRate,
 } as ComponentMeta<typeof ExchangeRate>;
 
