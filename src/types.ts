@@ -11,19 +11,24 @@ export enum AccountType {
   to = 'to',
 }
 
+export enum ExchangeMode {
+  sell = 'sell',
+  buy = 'buy',
+}
+
 export interface Currency {
   symbol?: string;
   code: string;
   name: string;
 }
 
-export interface GenericAction {
-  type: string;
-  payload: any;
-}
-
 export interface Account {
   id: string;
   currency: Currency;
   balance: number;
+}
+
+export interface GenericAction {
+  type: string;
+  payload: any;
 }
