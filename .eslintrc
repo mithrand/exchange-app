@@ -38,7 +38,8 @@
     "function-paren-newline": ["off"],
     "@typescript-eslint/indent": ["off"],
     "react/jsx-one-expression-per-line": ["off"],
-    "import/first": ["off"]
+    "import/first": ["off"],
+    "consistent-return": ["off"]
   },
   "globals": {
     "fetch": false,

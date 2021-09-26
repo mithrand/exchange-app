@@ -19,3 +19,12 @@ export const useToAccount = () =>
 
 export const useExchangeMode = () =>
   useSelector((state: Store) => state.exchange.mode);
+
+export const useExchangeRate = () =>
+  useSelector((state: Store) => state.exchange.exchangeRates);
+
+ export const useQuantityFrom = () =>
+  useSelector((state: Store) => state.exchange.quantityFrom);
+
+  export const useQuantityTo = () =>
+  useSelector((state: Store) => state.exchange.quantityTo);

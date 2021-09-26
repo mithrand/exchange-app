@@ -24,4 +24,5 @@ export const margin = {
 export const backgroundColors = {
   grey: '#f7f7f7',
   greyDark: '#f8f8f8',
+  white: '#ffffff',
 };

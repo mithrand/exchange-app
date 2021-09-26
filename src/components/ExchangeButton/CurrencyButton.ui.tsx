@@ -17,6 +17,7 @@ const currencyCss = css({
   fontFamily: styles.fontFamily.main,
   display: 'inline-block',
   width: '50%',
+  cursor: 'pointer',
 });
 
 const iconCss = {

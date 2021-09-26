@@ -22,6 +22,8 @@ const quantityInputCss = css({
   display: 'inline-block',
   width: '50%',
   padding: '0px',
+  outline: 'none',
+  caretColor: styles.colors.blue,
 });
 
 const QuantityInput = ({ quantity }: Props) => (
