@@ -3,12 +3,12 @@
 
 import React from 'react';
 import { css, jsx } from '@emotion/react';
-import { onKeysPressHelper } from '../../utils';
 import * as styles from '../../stylesContants';
 
 interface Props {
   children: string;
   onClick(): void;
+  disabled?: boolean;
 }
 
 const buttonCss = css({
@@ -29,6 +29,7 @@ const buttonCss = css({
   paddingLeft: '1rem',
   paddingRight: '1rem',
   borderRadius: '10px',
+  border: '0px',
   boxShadow:
     'rgb(6 102 235 / 12%) 0px 0.7rem 1.3rem 0px, rgb(6 102 235 / 24%) 0px 1rem 2.2rem 0px',
   backgroundColor: styles.colors.blue,
@@ -40,24 +41,22 @@ const buttonCss = css({
   `,
   cursor: 'pointer',
   display: 'flex',
+  margin: styles.margin.normal,
   ':hover': {
     backgroundColor: styles.colors.blueHover,
     boxShadow: `rgb(6 102 235 / 9%) 0px 0.5rem 1rem 0px, 
       rgb(6 102 235 / 18%) 0px 0.9rem 2rem 0px`,
   },
-  margin: styles.margin.normal,
+  ':disabled': {
+    backgroundColor: styles.colors.grey,
+    boxShadow: 'none',
+  },
 });
 
-const BaseButton = ({ children, onClick }: Props) => (
-  <div
-    role="button"
-    css={buttonCss}
-    onClick={onClick}
-    onKeyPress={onKeysPressHelper(onClick)}
-    tabIndex={0}
-  >
+const BaseButton = ({ children, onClick, disabled = false }: Props) => (
+  <button type="button" css={buttonCss} onClick={onClick} disabled={disabled}>
     {children}
-  </div>
+  </button>
 );
 
 export default BaseButton;
