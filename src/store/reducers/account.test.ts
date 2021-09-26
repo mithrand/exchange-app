@@ -5,7 +5,11 @@ import {
   removeFromBalance,
   setAccountFrom,
   setAccountTo,
+  openAccountList,
+  closeAccountList,
 } from '../actions/accounts';
+
+import { AccountType } from '../../types';
 
 describe('Account reducer', () => {
   it('not mapped reducer return same state', async () => {
@@ -20,18 +24,14 @@ describe('Account reducer', () => {
     const account = initialState.accounts[1];
     const action = addToBalance(account.id, 100);
     const finalState = reducer(initialState, action);
-    expect(finalState.accounts[1].balance).toBe(
-      account.balance + 100,
-    );
+    expect(finalState.accounts[1].balance).toBe(account.balance + 100);
   });
 
   it('addToBalance remove quantity to account balance', async () => {
     const account = initialState.accounts[1];
     const action = removeFromBalance(account.id, 100);
     const finalState = reducer(initialState, action);
-    expect(finalState.accounts[1].balance).toBe(
-      account.balance - 100,
-    );
+    expect(finalState.accounts[1].balance).toBe(account.balance - 100);
   });
 
   it('setAccountFrom set the new account', async () => {
@@ -58,5 +58,26 @@ describe('Account reducer', () => {
     const action = setAccountTo('fakeAccount');
     const finalState = reducer(initialState, action);
     expect(finalState.to).toBe(initialState.to);
+  });
+
+  it('Open / close account list', async () => {
+    // open as 'from'
+    expect(initialState.isAccountListOpen).toBe(false);
+    const openActionFrom = openAccountList(AccountType.from);
+    let state = reducer(initialState, openActionFrom);
+    expect(state.isAccountListOpen).toBe(true);
+    expect(state.accountListMode).toBe(AccountType.from);
+
+    // close
+    const closeAction = closeAccountList();
+    state = reducer(initialState, closeAction);
+    expect(state.isAccountListOpen).toBe(false);
+    expect(state.accountListMode).toBe('');
+
+    // open as 'to'
+    const openActionTo = openAccountList(AccountType.to);
+    state = reducer(initialState, openActionTo);
+    expect(state.isAccountListOpen).toBe(true);
+    expect(state.accountListMode).toBe(AccountType.to);
   });
 });

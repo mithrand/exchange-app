@@ -1,36 +1,22 @@
-import { v4 as uuid } from 'uuid';
 import { ACTIONS_TYPES } from '../actions/accounts';
-import { Account, GenericAction } from '../../types';
-import currencies from '../../data/currencies';
+import { Account, GenericAction, AccountType } from '../../types';
+import accounts from '../../data/accounts';
 
 export interface AccountsState {
   accounts: Account[];
   from: Account['id'];
   to: Account['id'];
+  isAccountListOpen: boolean;
+  accountListMode: AccountType | '';
 }
 
-const accounts = [
-  {
-    id: uuid(),
-    currency: { ...currencies.EUR },
-    balance: 1500.894,
-  },
-  {
-    id: uuid(),
-    currency: { ...currencies.GBP },
-    balance: 120.57,
-  },
-  {
-    id: uuid(),
-    currency: { ...currencies.USD },
-    balance: 0,
-  },
-];
 
 export const initialState: AccountsState = {
   accounts,
   from: accounts[0].id,
   to: accounts[1].id,
+  isAccountListOpen: false,
+  accountListMode: '',
 };
 
 const addBalanceToAccount = (
@@ -93,7 +79,24 @@ const reducers = {
     { accountId }: { accountId: Account['id'] },
   ): AccountsState => ({
     ...state,
-    to: state.accounts.find((account) => account.id === accountId)?.id || state.to,
+    to:
+      state.accounts.find((account) => account.id === accountId)?.id ||
+      state.to,
+  }),
+  [ACTIONS_TYPES.OPEN_ACCOUNT_LIST]: (
+    state: AccountsState,
+    payload: { mode: AccountType },
+  ): AccountsState => ({
+    ...state,
+    isAccountListOpen: true,
+    accountListMode: payload.mode,
+  }),
+  [ACTIONS_TYPES.CLOSE_ACCOUNT_LIST]: (
+    state: AccountsState,
+  ): AccountsState => ({
+    ...state,
+    isAccountListOpen: false,
+    accountListMode: '',
   }),
   default: (state: AccountsState) => state,
 };

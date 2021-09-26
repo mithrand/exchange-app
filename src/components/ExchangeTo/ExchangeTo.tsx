@@ -1,22 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Store } from '../../store';
-import { Account } from '../../types';
+import { Account, AccountType } from '../../types';
+import { openAccountList } from '../../store/actions/accounts';
 
 import ExchangeButton from '../ExchangeButton';
 
+const toAccountSelector = (state: Store) =>
+  state.accountsData.accounts.find((acc) => acc.id === state.accountsData.to) ||
+  state.accountsData.accounts[0];
+
+const openToModal = (dispatch: ReturnType<typeof useDispatch>) => () =>
+  dispatch(openAccountList(AccountType.to));
+
 const ExchangeTo = () => {
-  const fromAccount: Account = useSelector<Store, Account>(
-    (state) =>
-      state.accountsData.accounts.find(
-        (acc) => acc.id === state.accountsData.to,
-      ) || state.accountsData.accounts[0],
-  );
-  const openToModal = () => {};
+  const dispatch = useDispatch();
+  const toAccount: Account = useSelector<Store, Account>(toAccountSelector);
   return (
     <ExchangeButton
-      currencyAccount={fromAccount}
-      onCurrencyButtonClick={openToModal}
+      currencyAccount={toAccount}
+      onCurrencyButtonClick={openToModal(dispatch)}
     />
   );
 };

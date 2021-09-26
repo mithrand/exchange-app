@@ -6,6 +6,11 @@ declare global {
   }
 }
 
+export enum AccountType {
+  from = 'from',
+  to = 'to',
+}
+
 export interface Currency {
   symbol?: string;
   code: string;
