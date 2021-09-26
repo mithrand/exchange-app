@@ -37,7 +37,8 @@
     "no-confusing-arrow": ["off"],
     "function-paren-newline": ["off"],
     "@typescript-eslint/indent": ["off"],
-    "react/jsx-one-expression-per-line": ["off"]
+    "react/jsx-one-expression-per-line": ["off"],
+    "import/first": ["off"]
   },
   "globals": {
     "fetch": false,

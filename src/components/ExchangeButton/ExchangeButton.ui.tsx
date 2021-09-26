@@ -28,6 +28,8 @@ const exchangeButtonCss = css({
   padding: '1rem',
   maxWidth: '450px',
   minWidth: '150px',
+  boxShadow:
+  'rgb(181 198 221 / 12%) 0px 0.7rem 1.3rem 0px, rgb(234 234 235 / 24%) 0px 1rem 2.2rem 0px',
 });
 
 const ExchangeButton = ({

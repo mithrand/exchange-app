@@ -24,8 +24,11 @@ const accountListItem = css({
   margin: '0.5rem 0rem',
   ':hover': {
     backgroundColor: '#b7b7b752',
+    boxShadow: 'var(--cell-shadow-collapsed),var(--cell-shadow-base),var(--cell-shadow-hover)',
   },
   padding: '5px',
+  borderRadius: '5px',
+  cursor: 'pointer',
 });
 
 const mainAccounDataCss = css({
