@@ -1,5 +1,5 @@
 import { KeyboardEvent } from 'react';
-import { Currency } from '../types';
+import { Currency, ExchangeRates } from '../types';
 
 export const getCurrencyShort = (currency: Currency) =>
   currency.symbol || currency.code;
@@ -24,3 +24,9 @@ export const onKeysPressHelper =
       onClick();
     }
   };
+
+export const calculateExchageRate = (
+  exchangeRates: ExchangeRates,
+  from: Currency,
+  to: Currency,
+) => exchangeRates[to.code] / exchangeRates[from.code];

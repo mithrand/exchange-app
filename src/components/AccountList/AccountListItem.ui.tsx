@@ -19,16 +19,20 @@ const printBalance = printQuantity(BALANCE_PRECISION);
 const accountListItem = css({
   listStyleType: 'none',
   width: '100%',
-  height: '2.25rem',
+  height: '2.5rem',
   position: 'relative',
   margin: '0.5rem 0rem',
-  ':hover': {
-    backgroundColor: '#b7b7b752',
-    boxShadow: 'var(--cell-shadow-collapsed),var(--cell-shadow-base),var(--cell-shadow-hover)',
-  },
-  padding: '5px',
+  padding: '10px',
   borderRadius: '5px',
   cursor: 'pointer',
+  backgroundColor: styles.backgroundColors.white,
+  boxShadow:
+  'rgb(181 198 221 / 12%) 0px 0.7rem 1.3rem 0px, rgb(234 234 235 / 24%) 0px 1rem 2.2rem 0px',
+  ':hover': {
+    backgroundColor: '#b7b7b752',
+    boxShadow: 'rgb(54 56 58 / 12%) 0px 0.7rem 1.3rem 0px, rgb(69 69 70 / 26%) 0px 1rem 2.2rem 0px',
+  },
+
 });
 
 const mainAccounDataCss = css({
@@ -44,7 +48,7 @@ const secondaryAccounDataCss = css({
   color: styles.colors.grey,
   width: '100%',
   display: 'block',
-  bottom: '0px',
+  bottom: '10px',
   position: 'absolute',
 });
 

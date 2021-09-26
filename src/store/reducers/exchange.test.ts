@@ -1,8 +1,8 @@
 import reducer, { initialState } from './exchange';
 
-import { changeExchangeMode } from '../actions/exchange';
+import { changeExchangeMode, updateExchangeRates } from '../actions/exchange';
 
-import { ExchangeMode } from '../../types';
+import { ExchangeMode, ExchangeRates } from '../../types';
 
 describe('exchange reducer', () => {
   it('not mapped reducer return same state', async () => {
@@ -22,5 +22,17 @@ describe('exchange reducer', () => {
 
     finalState = reducer(finalState, action);
     expect(finalState.mode).toBe(ExchangeMode.sell);
+  });
+
+  it('updateExchangeRates update exchange rates', async () => {
+    const exchangeRates: ExchangeRates = {
+      EUR: 1,
+      GBP: 0.8563,
+      USD: 1.1716,
+    };
+    const action = updateExchangeRates(exchangeRates);
+    const finalState = reducer(initialState, action);
+    expect(initialState.exchangeRates).toBe(null);
+    expect(finalState.exchangeRates).toBe(exchangeRates);
   });
 });

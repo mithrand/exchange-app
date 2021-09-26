@@ -16,6 +16,8 @@ export enum ExchangeMode {
   buy = 'buy',
 }
 
+export type ExchangeRates = Record<string, number>;
+
 export interface Currency {
   symbol?: string;
   code: string;
