@@ -11,6 +11,7 @@ import SellBuyButton from '../components/Buttons/SellBuyButton';
 import ExchangeFrom from '../components/ExchangeFrom';
 import ConfirmButton from '../components/Buttons/ConfirmButton';
 import AccountList from '../components/AccountList';
+import ConfirmationMessage from '../components/ConfirmationMessage';
 
 
 const App = () => (
@@ -24,6 +25,7 @@ const App = () => (
     <ExchangeTo />
     <ConfirmButton />
     <AccountList />
+    <ConfirmationMessage />
   </StateProvider>
 );
 

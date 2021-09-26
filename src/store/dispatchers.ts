@@ -6,6 +6,8 @@ import {
   updateQuantityFrom,
   updateQuantityTo,
   resetQuantities,
+  closeConfirmationMessage,
+  openConfirmationMessage,
 } from './actions/exchange';
 
 import {
@@ -13,6 +15,9 @@ import {
   useToAccount,
   useFromAccount,
   useAccountListMode,
+  useExchangeMode,
+  useQuantityFrom,
+  useQuantityTo,
 } from './selectors';
 
 import {
@@ -20,6 +25,8 @@ import {
   setAccountFrom,
   setAccountTo,
   closeAccountList,
+  removeFromBalance,
+  addToBalance,
 } from './actions/accounts';
 
 import { calculateExchageRate } from '../utils';
@@ -29,6 +36,7 @@ import {
   ExchangeRates,
   Quantity,
   Account,
+  ExchangeMode,
 } from '../types';
 
 export const useChangeExchangeModeDispatcher = () => {
@@ -77,7 +85,7 @@ export const useUpdateQuantityToDispatcher = () => {
         fromAccount.currency,
         toAccount.currency,
       );
-      dispatch(updateQuantityFrom(quantity ? quantity * exchangeRate : 0));
+      dispatch(updateQuantityFrom(quantity ? quantity / exchangeRate : 0));
       dispatch(updateQuantityTo(quantity));
     }
   };
@@ -103,5 +111,36 @@ export const useCloseListDispatcher = () => {
   const dispatch = useDispatch();
   return () => {
     dispatch(closeAccountList());
+  };
+};
+
+export const useSubmitExchangeDispatcher = () => {
+  const dispatch = useDispatch();
+  const exchangeRates = useExchangeRates();
+  const fromAccount = useFromAccount();
+  const fromQuantity = useQuantityFrom();
+  const toAccount = useToAccount();
+  const toQuantity = useQuantityTo();
+  const exchangeMode = useExchangeMode();
+  return () => {
+    if (exchangeRates && fromQuantity && toQuantity) {
+      if (exchangeMode === ExchangeMode.sell) {
+        dispatch(removeFromBalance(fromAccount.id, fromQuantity));
+        dispatch(addToBalance(toAccount.id, toQuantity));
+      }
+      if (exchangeMode === ExchangeMode.buy) {
+        dispatch(addToBalance(fromAccount.id, fromQuantity));
+        dispatch(removeFromBalance(toAccount.id, toQuantity));
+      }
+      dispatch(openConfirmationMessage());
+    }
+  };
+};
+
+export const useCloseConfirmationMessageDispatcher = () => {
+  const dispatch = useDispatch();
+  return () => {
+    dispatch(resetQuantities());
+    dispatch(closeConfirmationMessage());
   };
 };

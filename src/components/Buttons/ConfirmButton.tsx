@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSubmitExchangeDispatcher } from '../../store/dispatchers';
 import {
   useFromAccount,
   useToAccount,
@@ -27,9 +28,14 @@ const ConfirmButton = () => {
   const quantityFrom = useQuantityFrom();
   const quantityTo = useQuantityTo();
   const exchangeRates = useExchangeRates();
+  const submitExchange = useSubmitExchangeDispatcher();
 
   const shouldBeDisabled = ():boolean => {
     if (!exchangeRates) {
+      return true;
+    }
+
+    if (fromAccount === toAccount) {
       return true;
     }
 
@@ -43,9 +49,8 @@ const ConfirmButton = () => {
     return true;
   };
 
-  const onButtonClick = () => {};
   return (
-    <BaseButton onClick={onButtonClick} disabled={shouldBeDisabled()}>
+    <BaseButton onClick={submitExchange} disabled={shouldBeDisabled()}>
       {getConfirmMessage(fromAccount, toAccount, exchangeMode)}
     </BaseButton>
   );

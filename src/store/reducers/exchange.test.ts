@@ -5,6 +5,8 @@ import {
   updateExchangeRates,
   updateQuantityFrom,
   updateQuantityTo,
+  openConfirmationMessage,
+  closeConfirmationMessage,
 } from '../actions/exchange';
 
 import { ExchangeMode, ExchangeRates } from '../../types';
@@ -53,5 +55,16 @@ describe('exchange reducer', () => {
     const finalState = reducer(initialState, action);
     expect(initialState.quantityTo).toBe(0);
     expect(finalState.quantityTo).toBe(150.53);
+  });
+
+  it('open / close ConfirmationMessage open the confirmation', async () => {
+    let action = openConfirmationMessage();
+    let state = reducer(initialState, action);
+    expect(initialState.confirmationMessageOpen).toBe(false);
+    expect(state.confirmationMessageOpen).toBe(true);
+
+    action = closeConfirmationMessage();
+    state = reducer(state, action);
+    expect(state.confirmationMessageOpen).toBe(false);
   });
 });

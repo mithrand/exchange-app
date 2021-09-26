@@ -50,6 +50,7 @@ const buttonCss = css({
   ':disabled': {
     backgroundColor: styles.colors.grey,
     boxShadow: 'none',
+    cursor: 'inherit',
   },
 });
 
