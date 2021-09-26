@@ -35,7 +35,9 @@
     "react/require-default-props": ["off"],
     "@typescript-eslint/dot-notation": ["off"],
     "no-confusing-arrow": ["off"],
-    "function-paren-newline": ["off"]
+    "function-paren-newline": ["off"],
+    "@typescript-eslint/indent": ["off"],
+    "react/jsx-one-expression-per-line": ["off"]
   },
   "globals": {
     "fetch": false,

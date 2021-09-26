@@ -7,6 +7,7 @@ import Title from '../components/Title';
 import ExchangeRate from '../components/ExchangeRate';
 import ExchangeTo from '../components/ExchangeTo';
 import ExchangeFrom from '../components/ExchangeFrom';
+import AccountList from '../components/AccountList';
 
 const App = () => (
   <StateProvider store={store}>
@@ -15,6 +16,7 @@ const App = () => (
     <ExchangeRate />
     <ExchangeFrom />
     <ExchangeTo />
+    <AccountList />
   </StateProvider>
 );
 
