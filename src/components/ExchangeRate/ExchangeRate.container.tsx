@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  useExchangeRate,
+  useExchangeRates,
   useFromAccount,
   useToAccount,
 } from '../../store/selectors';
@@ -9,7 +9,7 @@ import { calculateExchageRate } from '../../utils';
 import ExchangeRate from './ExchangeRate.ui';
 
 const ExchangeRateContainer = () => {
-  const exchangeRate = useExchangeRate();
+  const exchangeRate = useExchangeRates();
   const accountFrom = useFromAccount();
   const accountTo = useToAccount();
   const rate = exchangeRate

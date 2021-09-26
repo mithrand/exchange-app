@@ -1,6 +1,11 @@
 import reducer, { initialState } from './exchange';
 
-import { changeExchangeMode, updateExchangeRates } from '../actions/exchange';
+import {
+  changeExchangeMode,
+  updateExchangeRates,
+  updateQuantityFrom,
+  updateQuantityTo,
+} from '../actions/exchange';
 
 import { ExchangeMode, ExchangeRates } from '../../types';
 
@@ -34,5 +39,19 @@ describe('exchange reducer', () => {
     const finalState = reducer(initialState, action);
     expect(initialState.exchangeRates).toBe(null);
     expect(finalState.exchangeRates).toBe(exchangeRates);
+  });
+
+  it('updateQuantityFrom update quantityFrom', async () => {
+    const action = updateQuantityFrom(150.53);
+    const finalState = reducer(initialState, action);
+    expect(initialState.quantityFrom).toBe(0);
+    expect(finalState.quantityFrom).toBe(150.53);
+  });
+
+  it('updateQuantityTo update quantityTo', async () => {
+    const action = updateQuantityTo(150.53);
+    const finalState = reducer(initialState, action);
+    expect(initialState.quantityTo).toBe(0);
+    expect(finalState.quantityTo).toBe(150.53);
   });
 });

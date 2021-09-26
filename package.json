@@ -22,6 +22,7 @@
     "lint": "eslint 'src/**/*.{js,ts,tsx}' --fix",
     "start": "webpack serve --config webpack/webpack.dev.js",
     "storybook": "start-storybook -p 6006",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest",
     "test:unit": "jest --coverage",
     "test": "yarn lint && yarn test:unit"
   },
@@ -81,6 +82,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
+    "react-number-format": "^4.7.3",
     "react-redux": "^7.2.5",
     "redux": "^4.1.1",
     "redux-saga": "^1.1.3",

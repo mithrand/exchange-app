@@ -17,14 +17,23 @@ export const useToAccount = () =>
       ) || state.accountsData.accounts[1],
   );
 
+export const useAccountListMode = () =>
+  useSelector((state: Store) => state.accountsData.accountListMode);
+
 export const useExchangeMode = () =>
   useSelector((state: Store) => state.exchange.mode);
 
-export const useExchangeRate = () =>
+export const useExchangeRates = () =>
   useSelector((state: Store) => state.exchange.exchangeRates);
 
- export const useQuantityFrom = () =>
+export const useQuantityFrom = () =>
   useSelector((state: Store) => state.exchange.quantityFrom);
 
-  export const useQuantityTo = () =>
+export const useQuantityTo = () =>
   useSelector((state: Store) => state.exchange.quantityTo);
+
+export const useAccountListStatus = () =>
+  useSelector((state: Store) => state.accountsData.isAccountListOpen);
+
+export const useAccounts = () =>
+  useSelector((state: Store) => state.accountsData.accounts);

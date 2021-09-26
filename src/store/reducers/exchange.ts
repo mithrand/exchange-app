@@ -1,16 +1,23 @@
 import { ACTIONS_TYPES } from '../actions/exchange';
-import { ExchangeMode, GenericAction, ExchangeRates } from '../../types';
+import {
+  ExchangeMode,
+  GenericAction,
+  ExchangeRates,
+  Quantity,
+} from '../../types';
 
 export interface ExchangeState {
   mode: ExchangeMode;
   exchangeRates: ExchangeRates | null;
-  quantityFrom?: number;
-  quantityTo?: number;
+  quantityFrom: Quantity;
+  quantityTo: Quantity;
 }
 
 export const initialState: ExchangeState = {
   mode: ExchangeMode.sell,
   exchangeRates: null,
+  quantityFrom: 0,
+  quantityTo: 0,
 };
 
 const reducers = {
@@ -25,6 +32,19 @@ const reducers = {
     state: ExchangeState,
     payload: { exchangeRates: ExchangeRates },
   ): ExchangeState => ({ ...state, exchangeRates: payload.exchangeRates }),
+  [ACTIONS_TYPES.UPDATE_QUANTITY_FROM]: (
+    state: ExchangeState,
+    payload: { quantity: Quantity },
+  ): ExchangeState => ({ ...state, quantityFrom: payload.quantity }),
+  [ACTIONS_TYPES.UPDATE_QUANTITY_TO]: (
+    state: ExchangeState,
+    payload: { quantity: Quantity },
+  ): ExchangeState => ({ ...state, quantityTo: payload.quantity }),
+  [ACTIONS_TYPES.RESET_QUANTITIES]: (state: ExchangeState): ExchangeState => ({
+    ...state,
+    quantityFrom: 0,
+    quantityTo: 0,
+  }),
   default: (state: ExchangeState) => state,
 };
 
