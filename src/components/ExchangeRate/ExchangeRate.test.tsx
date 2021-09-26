@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-const mockUseExchangeRate = jest.fn();
+const mockUseExchangeRates = jest.fn();
 const mockUseFromAccount = jest.fn();
 const mockUseToAccount = jest.fn();
 
 jest.mock('../../store/selectors', () => ({
-  useExchangeRate: mockUseExchangeRate,
+  useExchangeRates: mockUseExchangeRates,
   useFromAccount: mockUseFromAccount,
   useToAccount: mockUseToAccount,
 }));
@@ -42,7 +42,7 @@ const mockedAccountTo: Account = {
 
 describe('ExchangeRate', () => {
   beforeEach(() => {
-    mockUseExchangeRate.mockClear().mockImplementation(() => mockedExchangeRates);
+    mockUseExchangeRates.mockClear().mockImplementation(() => mockedExchangeRates);
     mockUseFromAccount.mockClear().mockImplementation(() => mockedAccountFrom);
     mockUseToAccount.mockClear().mockImplementation(() => mockedAccountTo);
   });

@@ -1,17 +1,26 @@
 import React from 'react';
-import { useToAccount } from '../../store/selectors';
-import { useOpenModalDispatcher } from '../../store/dispatchers';
-import { AccountType } from '../../types';
+import {
+  useOpenModalDispatcher,
+  useUpdateQuantityToDispatcher,
+} from '../../store/dispatchers';
+import { useToAccount, useQuantityTo, useExchangeMode } from '../../store/selectors';
+import { AccountType, ExchangeMode } from '../../types';
 
 import ExchangeButton from '../ExchangeButton';
 
 const ExchangeTo = () => {
-  const openToModal = useOpenModalDispatcher(AccountType.to);
-  const toAccount = useToAccount();
+  const openModal = useOpenModalDispatcher(AccountType.to);
+  const account = useToAccount();
+  const quantity = useQuantityTo();
+  const exchangeMode = useExchangeMode();
+  const onQuantityChange = useUpdateQuantityToDispatcher();
   return (
     <ExchangeButton
-      currencyAccount={toAccount}
-      onCurrencyButtonClick={openToModal}
+      account={account}
+      onCurrencyButtonClick={openModal}
+      quantity={quantity}
+      onQuantityChange={onQuantityChange}
+      isNegative={exchangeMode === ExchangeMode.buy}
     />
   );
 };

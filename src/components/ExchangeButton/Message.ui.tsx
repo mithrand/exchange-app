@@ -7,17 +7,18 @@ import * as styles from '../../stylesContants';
 
 interface Props {
   children: string;
+  alert: boolean,
 }
 
-const messageCss = css({
+const messageCss = (alert: boolean) => css({
   fontFamily: styles.fontFamily.main,
   fontSize: styles.fontSizes.small,
   textAlign: 'right',
-  color: styles.colors.red,
+  color: alert ? styles.colors.red : styles.colors.grey,
   width: '50%',
   display: 'inline-block',
 });
 
-const Message = ({ children }: Props) => <span data-testid="message" css={messageCss}>{children}</span>;
+const Message = ({ children, alert }: Props) => <span data-testid="message" css={messageCss(alert)}>{children}</span>;
 
 export default Message;

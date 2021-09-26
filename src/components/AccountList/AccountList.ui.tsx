@@ -35,6 +35,7 @@ const AccountList = ({
     isOpen
     contentLabel="Select account"
     onRequestClose={onCloseClick}
+    appElement={document.body}
     style={{
       content: {
         backgroundColor: styles.backgroundColors.greyDark,
