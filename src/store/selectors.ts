@@ -37,3 +37,6 @@ export const useAccountListStatus = () =>
 
 export const useAccounts = () =>
   useSelector((state: Store) => state.accountsData.accounts);
+
+export const useConfirmationMessageState = () =>
+  useSelector((state: Store) => state.exchange.confirmationMessageOpen);

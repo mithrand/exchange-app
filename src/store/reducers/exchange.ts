@@ -11,6 +11,7 @@ export interface ExchangeState {
   exchangeRates: ExchangeRates | null;
   quantityFrom: Quantity;
   quantityTo: Quantity;
+  confirmationMessageOpen: boolean;
 }
 
 export const initialState: ExchangeState = {
@@ -18,6 +19,7 @@ export const initialState: ExchangeState = {
   exchangeRates: null,
   quantityFrom: 0,
   quantityTo: 0,
+  confirmationMessageOpen: false,
 };
 
 const reducers = {
@@ -44,6 +46,14 @@ const reducers = {
     ...state,
     quantityFrom: 0,
     quantityTo: 0,
+  }),
+  [ACTIONS_TYPES.OPEN_CONFIRMATION_MESSAGE]: (state: ExchangeState): ExchangeState => ({
+    ...state,
+    confirmationMessageOpen: true,
+  }),
+  [ACTIONS_TYPES.CLOSE_CONFIRMATION_MESSAGE]: (state: ExchangeState): ExchangeState => ({
+    ...state,
+    confirmationMessageOpen: false,
   }),
   default: (state: ExchangeState) => state,
 };

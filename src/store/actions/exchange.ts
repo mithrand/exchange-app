@@ -6,6 +6,8 @@ export const ACTIONS_TYPES = {
   UPDATE_QUANTITY_FROM: '@exchange/UPDATE_QUANTITY_FROM',
   UPDATE_QUANTITY_TO: '@exchange/UPDATE_QUANTITY_TO',
   RESET_QUANTITIES: '@exchange/RESET_QUANTITIES',
+  OPEN_CONFIRMATION_MESSAGE: '@exchange/OPEN_CONFIRMATION_MESSAGE',
+  CLOSE_CONFIRMATION_MESSAGE: '@exchange/CLOSE_CONFIRMATION_MESSAGE',
 };
 
 export const changeExchangeMode = () => ({
@@ -33,3 +35,13 @@ export const resetQuantities = () => ({
   payload: {},
 });
 
+export const openConfirmationMessage = () => ({
+  type: ACTIONS_TYPES.OPEN_CONFIRMATION_MESSAGE,
+  payload: {},
+});
+
+
+export const closeConfirmationMessage = () => ({
+  type: ACTIONS_TYPES.CLOSE_CONFIRMATION_MESSAGE,
+  payload: {},
+});
