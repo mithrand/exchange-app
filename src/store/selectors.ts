@@ -32,7 +32,7 @@ export const useQuantityFrom = () =>
 export const useQuantityTo = () =>
   useSelector((state: Store) => state.exchange.quantityTo);
 
-export const useAccountListStatus = () =>
+export const useAccountIsOpen = () =>
   useSelector((state: Store) => state.accountsData.isAccountListOpen);
 
 export const useAccounts = () =>

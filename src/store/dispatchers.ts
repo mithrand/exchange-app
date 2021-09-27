@@ -32,7 +32,7 @@ import {
 import { calculateExchageRate, notifyError } from '../utils';
 
 import {
-  AccountType, Quantity, Account, ExchangeMode
+  AccountType, Quantity, Account, ExchangeMode,
 } from '../types';
 import { getExchangeRates } from '../API/getExchangeRates';
 

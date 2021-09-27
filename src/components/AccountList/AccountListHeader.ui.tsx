@@ -66,6 +66,7 @@ const AccountListHeader = ({
 }: Props) => (
   <div css={accountHeaderCss} data-testid="account-list-header">
     <div
+      data-testid="close"
       css={closeButtonCss}
       role="button"
       onClick={onCloseClick}
@@ -75,6 +76,7 @@ const AccountListHeader = ({
       <ArrowIcon {...iconCss} />
     </div>
     <input
+      data-testid="search"
       css={searchBarCss}
       type="text"
       value={searchString}
