@@ -16,10 +16,13 @@ const getMessages = (balanceExceeded: boolean): string => {
   return messages.join(',');
 };
 
-export const ExchangeButtonContainer = (props: Props) => {
+export const ExchangeButtonContainer = ({
+  quantity,
+  ...props
+}: Props) => {
   const [balanceExceeded, setBalanceExceded] = useState(false);
-  const checkQuantity = () => (quantity: Quantity) => {
-    if (quantity && props.isNegative && props.account.balance < quantity) {
+  const checkQuantity = (quantityToCheck: Quantity) => {
+    if (quantityToCheck && props.isNegative && props.account.balance < quantityToCheck) {
       if (!balanceExceeded) {
         setBalanceExceded(true);
       }
@@ -27,11 +30,13 @@ export const ExchangeButtonContainer = (props: Props) => {
       setBalanceExceded(false);
     }
   };
+
+  checkQuantity(quantity);
   return (
     <ExchangeButton
       {...props}
+      quantity={quantity}
       alert={balanceExceeded}
-      checkValue={checkQuantity()}
       message={getMessages(balanceExceeded)}
     />
   );

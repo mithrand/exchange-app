@@ -18,6 +18,7 @@ import {
   useExchangeMode,
   useQuantityFrom,
   useQuantityTo,
+  useExchangeRate,
 } from './selectors';
 
 import {
@@ -32,13 +33,28 @@ import {
 import { calculateExchageRate, notifyError } from '../utils';
 
 import {
-  AccountType, Quantity, Account, ExchangeMode,
+ AccountType, Quantity, Account, ExchangeMode,
 } from '../types';
 import { getExchangeRates } from '../API/getExchangeRates';
 
 export const useChangeExchangeModeDispatcher = () => {
   const dispatch = useDispatch();
-  return () => dispatch(changeExchangeMode());
+  const exchangeRate = useExchangeRate();
+  const exchangeMode = useExchangeMode();
+  const quantityFrom = useQuantityFrom();
+  const quantityTo = useQuantityTo();
+  return () => {
+    if (exchangeMode === ExchangeMode.sell) {
+      const newQuantity =
+        quantityFrom && exchangeRate ? quantityFrom * exchangeRate : 0;
+      dispatch(updateQuantityTo(newQuantity));
+    } else {
+      const newQuantity =
+        quantityTo && exchangeRate ? quantityTo / exchangeRate : 0;
+      dispatch(updateQuantityFrom(newQuantity));
+    }
+    dispatch(changeExchangeMode());
+  };
 };
 
 export const useOpenModalDispatcher = (accountType: AccountType) => {
@@ -48,23 +64,10 @@ export const useOpenModalDispatcher = (accountType: AccountType) => {
 
 export const useUpdateExchangeRatesDispatcher = () => {
   const dispatch = useDispatch();
-  const fromAccount = useFromAccount();
-  const toAccount = useToAccount();
-  const fromQuantity = useQuantityFrom();
   return async () => {
     try {
       const exchangeRates = await getExchangeRates();
       dispatch(updateExchangeRates(exchangeRates));
-      const exchangeRate = calculateExchageRate(
-        exchangeRates,
-        fromAccount.currency,
-        toAccount.currency,
-      );
-      if (fromQuantity) {
-        dispatch(
-          updateQuantityTo(fromQuantity ? fromQuantity * exchangeRate : 0),
-        );
-      }
     } catch (error: any) {
       notifyError(error);
     }
@@ -132,20 +135,20 @@ export const useCloseListDispatcher = () => {
 
 export const useSubmitExchangeDispatcher = () => {
   const dispatch = useDispatch();
-  const exchangeRates = useExchangeRates();
+  const exchageRate = useExchangeRate();
   const fromAccount = useFromAccount();
   const fromQuantity = useQuantityFrom();
   const toAccount = useToAccount();
   const toQuantity = useQuantityTo();
   const exchangeMode = useExchangeMode();
   return () => {
-    if (exchangeRates && fromQuantity && toQuantity) {
+    if (exchageRate && fromQuantity && toQuantity) {
       if (exchangeMode === ExchangeMode.sell) {
+        dispatch(addToBalance(toAccount.id, fromQuantity * exchageRate));
         dispatch(removeFromBalance(fromAccount.id, fromQuantity));
-        dispatch(addToBalance(toAccount.id, toQuantity));
       }
       if (exchangeMode === ExchangeMode.buy) {
-        dispatch(addToBalance(fromAccount.id, fromQuantity));
+        dispatch(addToBalance(fromAccount.id, toQuantity / exchageRate));
         dispatch(removeFromBalance(toAccount.id, toQuantity));
       }
       dispatch(openConfirmationMessage());

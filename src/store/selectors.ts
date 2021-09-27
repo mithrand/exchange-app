@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { calculateExchageRate } from '../utils';
 import { Store } from './index';
 
 export const useFromAccount = () =>
@@ -40,3 +41,13 @@ export const useAccounts = () =>
 
 export const useConfirmationMessageState = () =>
   useSelector((state: Store) => state.exchange.confirmationMessageOpen);
+
+export const useExchangeRate = () => {
+  const exchangeRates = useExchangeRates();
+  const accountFrom = useFromAccount();
+  const accoutTo = useToAccount();
+  if (exchangeRates) {
+    return calculateExchageRate(exchangeRates, accountFrom.currency, accoutTo.currency);
+  }
+  return null;
+};

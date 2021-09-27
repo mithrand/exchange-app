@@ -35,6 +35,7 @@ const mockUseQuantityTo = jest.fn();
 const mockNotifyError = jest.fn();
 const mockCalculateExchageRate = jest.fn();
 const mockExchangeMode = jest.fn();
+const mockUseExchangeRate = jest.fn();
 
 const mockUseExchangeRates = jest
   .fn()
@@ -60,6 +61,7 @@ jest.mock('./selectors', () => ({
   useExchangeRates: mockUseExchangeRates,
   useAccountListMode: mockUseAccountListMode,
   useExchangeMode: mockExchangeMode,
+  useExchangeRate: mockUseExchangeRate,
 }));
 
 import {
@@ -84,12 +86,23 @@ describe('Dispatchers', () => {
     mockNotifyError.mockClear();
     mockCalculateExchageRate.mockClear().mockImplementation(() => 3);
     mockExchangeMode.mockClear().mockImplementation(() => ExchangeMode.sell);
+    mockUseExchangeRate.mockClear().mockImplementation(() => 0.5);
   });
 
   describe('useChangeExchangeModeDispatcher', () => {
-    it('dispatch change exchange mode', () => {
+    it('dispatch change exchange mode sell', () => {
+      mockExchangeMode.mockClear().mockImplementation(() => ExchangeMode.sell);
       const dispatcher = useChangeExchangeModeDispatcher();
       dispatcher();
+      expect(mockDispatch).toBeCalledWith(updateQuantityTo(50));
+      expect(mockDispatch).toBeCalledWith(changeExchangeMode());
+    });
+
+    it('dispatch change exchange mode buy', () => {
+      mockExchangeMode.mockClear().mockImplementation(() => ExchangeMode.buy);
+      const dispatcher = useChangeExchangeModeDispatcher();
+      dispatcher();
+      expect(mockDispatch).toBeCalledWith(updateQuantityFrom(600));
       expect(mockDispatch).toBeCalledWith(changeExchangeMode());
     });
   });
@@ -116,17 +129,6 @@ describe('Dispatchers', () => {
         expect(mockDispatch).toBeCalledWith(
           updateExchangeRates(mockedExchangeRates),
         );
-        expect(mockDispatch).toBeCalledWith(updateQuantityTo(300));
-      });
-
-      it('Do not update quantity if is 0', async () => {
-        mockUseQuantityFrom.mockClear().mockImplementation(() => 0);
-        const dispatcher = useUpdateExchangeRatesDispatcher();
-        await dispatcher();
-        expect(mockDispatch).toBeCalledWith(
-          updateExchangeRates(mockedExchangeRates),
-        );
-        expect(mockDispatch).not.toBeCalledWith(updateQuantityTo(300));
       });
     });
 
@@ -200,10 +202,8 @@ describe('Dispatchers', () => {
       mockExchangeMode.mockReset().mockImplementation(() => ExchangeMode.sell);
       const dispatcher = useSubmitExchangeDispatcher();
       dispatcher();
-      expect(mockDispatch).toBeCalledWith(
-        removeFromBalance(accounts[0].id, 100),
-      );
-      expect(mockDispatch).toBeCalledWith(addToBalance(accounts[1].id, 300));
+      expect(mockDispatch).toBeCalledWith(addToBalance(accounts[1].id, 50));
+      expect(mockDispatch).toBeCalledWith(removeFromBalance(accounts[0].id, 100));
       expect(mockDispatch).toBeCalledWith(openConfirmationMessage());
     });
 
@@ -211,9 +211,7 @@ describe('Dispatchers', () => {
       mockExchangeMode.mockReset().mockImplementation(() => ExchangeMode.buy);
       const dispatcher = useSubmitExchangeDispatcher();
       dispatcher();
-      expect(mockDispatch).toBeCalledWith(
-        addToBalance(accounts[0].id, 100),
-      );
+      expect(mockDispatch).toBeCalledWith(addToBalance(accounts[0].id, 600));
       expect(mockDispatch).toBeCalledWith(removeFromBalance(accounts[1].id, 300));
       expect(mockDispatch).toBeCalledWith(openConfirmationMessage());
     });
