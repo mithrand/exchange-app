@@ -29,15 +29,12 @@ import {
   addToBalance,
 } from './actions/accounts';
 
-import { calculateExchageRate } from '../utils';
+import { calculateExchageRate, notifyError } from '../utils';
 
 import {
-  AccountType,
-  ExchangeRates,
-  Quantity,
-  Account,
-  ExchangeMode,
+  AccountType, Quantity, Account, ExchangeMode
 } from '../types';
+import { getExchangeRates } from '../API/getExchangeRates';
 
 export const useChangeExchangeModeDispatcher = () => {
   const dispatch = useDispatch();
@@ -51,8 +48,27 @@ export const useOpenModalDispatcher = (accountType: AccountType) => {
 
 export const useUpdateExchangeRatesDispatcher = () => {
   const dispatch = useDispatch();
-  return (exchangeRates: ExchangeRates) =>
-    dispatch(updateExchangeRates(exchangeRates));
+  const fromAccount = useFromAccount();
+  const toAccount = useToAccount();
+  const fromQuantity = useQuantityFrom();
+  return async () => {
+    try {
+      const exchangeRates = await getExchangeRates();
+      dispatch(updateExchangeRates(exchangeRates));
+      const exchangeRate = calculateExchageRate(
+        exchangeRates,
+        fromAccount.currency,
+        toAccount.currency,
+      );
+      if (fromQuantity) {
+        dispatch(
+          updateQuantityTo(fromQuantity ? fromQuantity * exchangeRate : 0),
+        );
+      }
+    } catch (error: any) {
+      notifyError(error);
+    }
+  };
 };
 
 export const useUpdateQuantityFromDispatcher = () => {

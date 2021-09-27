@@ -6,7 +6,7 @@ export interface Config {
 
 const config: Config = {
   baseCurrency: 'EUR',
-  exchangeRatePullingInverval: 60 * 10 * 1000, // 10 seconds in ms
+  exchangeRatePullingInverval: 10 * 1000, // 10 seconds in ms
   exchangeAPIurl: 'http://localhost:80',
 };
 
