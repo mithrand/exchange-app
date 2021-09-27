@@ -7,6 +7,7 @@ import {
   updateQuantityTo,
   openConfirmationMessage,
   closeConfirmationMessage,
+  resetQuantities,
 } from '../actions/exchange';
 
 import { ExchangeMode, ExchangeRates } from '../../types';
@@ -66,5 +67,12 @@ describe('exchange reducer', () => {
     action = closeConfirmationMessage();
     state = reducer(state, action);
     expect(state.confirmationMessageOpen).toBe(false);
+  });
+
+  it('reset quantities reset all quantities', async () => {
+    const action = resetQuantities();
+    const state = reducer({ ...initialState, quantityFrom: 100, quantityTo: 100 }, action);
+    expect(state.quantityFrom).toBe(0);
+    expect(state.quantityTo).toBe(0);
   });
 });

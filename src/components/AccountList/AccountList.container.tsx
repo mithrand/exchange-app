@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useSelectAccountDispatcher, useCloseListDispatcher } from '../../store/dispatchers';
-import { useAccountListStatus, useAccounts } from '../../store/selectors';
+import { useAccountIsOpen, useAccounts } from '../../store/selectors';
 
 import { Account } from '../../types';
 
@@ -22,7 +22,7 @@ const accountSearchFilter =
 const AccountListContainer = () => {
   const [searchString, setSearchString] = useState('');
   const accounts = useAccounts();
-  const isOpen = useAccountListStatus();
+  const isOpen = useAccountIsOpen();
   const closeList = useCloseListDispatcher();
   const selectAccount = useSelectAccountDispatcher();
 
