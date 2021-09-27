@@ -11,7 +11,6 @@ interface Props {
   quantity: Quantity;
   updateQuantity(quantity: Quantity): void;
   isNegative: boolean;
-  checkValue(quantity: Quantity): void;
 }
 
 const numberFormatCss = (isEditing: boolean, quantity: Quantity) =>
@@ -47,31 +46,14 @@ const calculatePrefix = (quantity: Quantity, isNegative: boolean) => {
   return '+';
 };
 
-const onValueChangeHandler =
-  ({
-    isEditing,
-    checkValue,
-    updateQuantity,
-  }: {
-    isEditing: boolean;
-    checkValue: Props['checkValue'];
-    updateQuantity: Props['updateQuantity'];
-  }) =>
-  (values: NumberFormatValues) => {
-    const quantity = converValueToQuantity(values);
-    if (isEditing) {
-      updateQuantity(quantity);
-    }
-    checkValue(quantity);
-  };
-
-const QuantityInput = ({
-  quantity,
-  updateQuantity,
-  isNegative,
-  checkValue,
-}: Props) => {
+const QuantityInput = ({ quantity, updateQuantity, isNegative }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
+  const onValueChangeHandler = (values: NumberFormatValues) => {
+    if (isEditing) {
+      const newQuantity = converValueToQuantity(values);
+      updateQuantity(newQuantity);
+    }
+  };
   return (
     <NumberFormat
       data-testid="quantity-input"
@@ -86,11 +68,7 @@ const QuantityInput = ({
       css={numberFormatCss(isEditing, quantity)}
       thousandSeparator="."
       defaultValue={0}
-      onValueChange={onValueChangeHandler({
-        isEditing,
-        checkValue,
-        updateQuantity,
-      })}
+      onValueChange={onValueChangeHandler}
       onFocus={() => setIsEditing(true)}
       onBlur={() => setIsEditing(false)}
       {...(!isEditing ? { value: quantity } : {})}

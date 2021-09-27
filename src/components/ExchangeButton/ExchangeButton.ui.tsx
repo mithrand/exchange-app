@@ -19,7 +19,6 @@ export interface Props {
   alert: boolean;
   onCurrencyButtonClick(): void;
   onQuantityChange(quantity: Quantity): void;
-  checkValue(quantity: Quantity): void;
 }
 
 const exchangeButtonCss = (alert: boolean) =>
@@ -45,7 +44,6 @@ const ExchangeButton = ({
   alert,
   onCurrencyButtonClick,
   onQuantityChange,
-  checkValue,
 }: Props) => (
   <div css={exchangeButtonCss(alert)}>
     <CurrencyButton
@@ -56,7 +54,6 @@ const ExchangeButton = ({
       quantity={quantity}
       updateQuantity={onQuantityChange}
       isNegative={isNegative}
-      checkValue={checkValue}
     />
     <Balance currencyAccount={currencyAccount} />
     {message && <Message alert={alert}>{message}</Message>}
