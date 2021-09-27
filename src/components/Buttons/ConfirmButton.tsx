@@ -48,7 +48,6 @@ const ConfirmButton = () => {
     }
     return true;
   };
-
   return (
     <BaseButton onClick={submitExchange} disabled={shouldBeDisabled()}>
       {getConfirmMessage(fromAccount, toAccount, exchangeMode)}
