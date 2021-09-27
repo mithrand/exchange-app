@@ -6,6 +6,7 @@ interface Props {}
 
 const ExchangeRatesProvider = ({}: Props) => {
   const updateExchangeRates = useUpdateExchangeRatesDispatcher();
+  updateExchangeRates();
   useEffect(() => {
     const intervalId = setInterval(
       updateExchangeRates,

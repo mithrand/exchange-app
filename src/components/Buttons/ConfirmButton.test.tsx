@@ -64,6 +64,12 @@ describe('ConfirmButton', () => {
     expect(button.textContent).toBe('Buy GBP with EUR');
   });
 
+  it('Is enabled', () => {
+    render(<ConfirmButton />);
+    const button = screen.getByRole('button');
+    expect(button.hasAttribute('disabled')).not.toBe(true);
+  });
+
   describe('Disabled status test', () => {
     it('is disable if no exchange rates', () => {
       mockUseExchangeRates.mockClear().mockImplementation(() => null);

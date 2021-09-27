@@ -32,7 +32,7 @@ describe('AccountList', () => {
   it('AccountList show a list of accounts', async () => {
     render(<AccountList />);
     const accountsItems = await screen.findAllByTestId('account-list-item');
-    expect(accountsItems).toHaveLength(3);
+    expect(accountsItems).toHaveLength(accounts.length);
   });
 
   it('AccountList show account data', async () => {
@@ -58,7 +58,7 @@ describe('AccountList', () => {
     expect(mockCloseListDispatcher).toBeCalled();
   });
 
-  it('on search content', async () => {
+  it('on search content filter accounts', async () => {
     render(<AccountList />);
     const header = screen.getByTestId('account-list-header');
     userEvent.type(within(header).getByTestId('search'), 'D');
@@ -66,5 +66,17 @@ describe('AccountList', () => {
     expect(filteredAccounts.length).toBe(2);
     expect(within(filteredAccounts[0]).getAllByText('Sterling Pound').length).toBe(1);
     expect(within(filteredAccounts[1]).getAllByText('United States Dollard').length).toBe(1);
+  });
+
+  it('on clear search content all accounts are visible', async () => {
+    render(<AccountList />);
+    const header = screen.getByTestId('account-list-header');
+    userEvent.type(within(header).getByTestId('search'), 'D');
+    const filteredAccounts = screen.getAllByTestId('account-list-item');
+    expect(filteredAccounts.length).toBe(2);
+    const clearTextButton = screen.getByTestId('clear');
+    userEvent.click(clearTextButton);
+    const allAccounts = screen.getAllByTestId('account-list-item');
+    expect(allAccounts.length).toBe(accounts.length);
   });
 });

@@ -1,17 +1,10 @@
 import React from 'react';
-import { Provider as StateProvider } from 'react-redux';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import currencies from '../../data/currencies';
-import store from '../../store';
 
 import ExchangeButton, { Props } from './ExchangeButton.container';
 
-const Wrapper = (props: Props) => (
-  <StateProvider store={store}>
-    <ExchangeButton {...props} />
-  </StateProvider>
-);
 
 describe('ExchangeButton', () => {
   const props: Props = {
@@ -20,83 +13,82 @@ describe('ExchangeButton', () => {
       currency: currencies.GBP,
       balance: 10000.578,
     },
-    message: 'this is a message',
-    onCurrencyButtonClick: jest.fn(),
     quantity: null,
-    onQuantityChange: jest.fn(),
     isNegative: false,
+    onCurrencyButtonClick: jest.fn(),
+    onQuantityChange: jest.fn(),
   };
 
   beforeEach(() => {
     (props.onCurrencyButtonClick as jest.Mock).mockReset();
   });
 
-  it('ExchangeButton - currency button is rendered', async () => {
-    render(<ExchangeButton {...props} />);
-    const currencyButton = await screen.findAllByText('GBP');
-    expect(currencyButton).toHaveLength(1);
-  });
-
-  it('ExchangeButton -  fire on click', async () => {
-    render(<ExchangeButton {...props} />);
-    userEvent.click(screen.getByTestId('currency-button'));
-    expect(props.onCurrencyButtonClick).toHaveBeenCalled();
-  });
-
-  it('ExchangeButton -  fire on enter keyPress', async () => {
-    render(<ExchangeButton {...props} />);
-    fireEvent.keyPress(screen.getByTestId('currency-button'), {
-      key: '1',
-      charCode: 49,
+  describe('Currency button', () => {
+    it('renders', async () => {
+      render(<ExchangeButton {...props} />);
+      screen.getByText('GBP');
     });
-    expect(props.onCurrencyButtonClick).not.toHaveBeenCalled();
-    fireEvent.keyPress(screen.getByTestId('currency-button'), {
-      key: 'Enter',
-      charCode: 13,
+
+    it('fire on click', async () => {
+      render(<ExchangeButton {...props} />);
+      userEvent.click(screen.getByTestId('currency-button'));
+      expect(props.onCurrencyButtonClick).toHaveBeenCalled();
     });
-    expect(props.onCurrencyButtonClick).toHaveBeenCalled();
+
+    it('fire on enter keyPress', async () => {
+      render(<ExchangeButton {...props} />);
+      fireEvent.keyPress(screen.getByTestId('currency-button'), {
+        key: '1',
+        charCode: 49,
+      });
+      expect(props.onCurrencyButtonClick).not.toHaveBeenCalled();
+      fireEvent.keyPress(screen.getByTestId('currency-button'), {
+        key: 'Enter',
+        charCode: 13,
+      });
+      expect(props.onCurrencyButtonClick).toHaveBeenCalled();
+    });
   });
 
-  it('ExchangeButton - currency button is rendered and fire click', async () => {
-    render(<ExchangeButton {...props} />);
-    const currencyButton = await screen.findAllByText('GBP');
-    expect(currencyButton).toHaveLength(1);
-    userEvent.click(screen.getByTestId('currency-button'));
-    expect(props.onCurrencyButtonClick).toHaveBeenCalled();
+  describe('Balance', () => {
+    it('is rendered', async () => {
+      render(<ExchangeButton {...props} />);
+      const balance = screen.getAllByText('Balance: 10000,58 £');
+      expect(balance).toHaveLength(1);
+    });
   });
 
-  it('ExchangeButton - balance is rendered', async () => {
-    render(<ExchangeButton {...props} />);
-    const balance = await screen.findAllByText('Balance: 10000,58 £');
-    expect(balance).toHaveLength(1);
-  });
+  describe('Quantity input', () => {
+    it('is rendered', async () => {
+      render(<ExchangeButton {...props} />);
+      const quantityInput = screen.getAllByTestId('quantity-input');
+      expect(quantityInput).toHaveLength(1);
+    });
 
-  // ToDo: Jest is not triggering focus, need investigate
-  xit('ExchangeButton - message is rendered with content', async () => {
-    const { rerender } = render(<Wrapper {...props} />);
-    const quantityInput = await screen.getByTestId('quantity-input');
-    quantityInput.focus();
-    userEvent.type(quantityInput, '1000000000');
-    rerender(<Wrapper {...props} />);
-    const messageContent = await screen.findAllByText('Balance is exceeded');
-    expect(messageContent).toHaveLength(1);
-  });
+    it('is show positive number', async () => {
+      render(<ExchangeButton {...{ ...props, quantity: 123456.5478 }} />);
+      const quantityInput = screen.getAllByDisplayValue('+123.456,55');
+      expect(quantityInput).toHaveLength(1);
+    });
 
-  it('ExchangeButton - message is not rendered when no content', async () => {
-    render(<ExchangeButton {...{ ...props, message: '' }} />);
-    const message = await screen.queryAllByTestId('message');
-    expect(message).toHaveLength(0);
-  });
+    it('is show positive number', async () => {
+      render(
+        <ExchangeButton
+          {...{ ...props, quantity: 123456.5478, isNegative: true }}
+        />,
+      );
+      const quantityInput = screen.getAllByDisplayValue('-123.456,55');
+      expect(quantityInput).toHaveLength(1);
+    });
 
-  it('ExchangeButton - quantity input is rendered', async () => {
-    render(<ExchangeButton {...props} />);
-    const quantityInput = await screen.getAllByTestId('quantity-input');
-    expect(quantityInput).toHaveLength(1);
-  });
-
-  it('ExchangeButton - quantity input is rendered', async () => {
-    render(<ExchangeButton {...{ ...props, quantity: 123456.5478 }} />);
-    const quantityInput = await screen.getAllByDisplayValue('+123.456,55');
-    expect(quantityInput).toHaveLength(1);
+    xit('message is rendered with content', async () => {
+      render(<ExchangeButton {...props} />);
+      const quantityInput = screen.getByTestId('quantity-input');
+      quantityInput.focus();
+      userEvent.click(quantityInput);
+      userEvent.type(quantityInput, '1000000000');
+      const messageContent = await screen.findAllByText('Balance is exceeded');
+      expect(messageContent).toHaveLength(1);
+    });
   });
 });
