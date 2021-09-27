@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import config from '../../config';
-import { ExchangeRates } from '../../types';
+import config from '../config';
+import { ExchangeRates } from '../types';
 
 const getUrl = () => `${config.exchangeAPIurl}/exchangeRates`;
 
