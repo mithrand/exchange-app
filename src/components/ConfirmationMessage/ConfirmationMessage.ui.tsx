@@ -71,6 +71,7 @@ const ConfirmationMessage = ({
     }}
   >
     <div
+      data-testid="confiramtion-message"
       role="button"
       css={confirmationMessageCss}
       onClick={closeModal}
@@ -78,9 +79,7 @@ const ConfirmationMessage = ({
       tabIndex={0}
     >
       <span css={messageOneCss}>You exchanged</span>
-      <span css={messageTwoCss}>
-        {formatCurrency(currencyFrom)(quantityFrom)} to $
-        {formatCurrency(currencyTo)(quantityTo)}
+      <span css={messageTwoCss}>{formatCurrency(currencyFrom)(quantityFrom)} to {formatCurrency(currencyTo)(quantityTo)}
       </span>
     </div>
   </Modal>

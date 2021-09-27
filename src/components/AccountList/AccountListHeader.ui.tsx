@@ -84,6 +84,7 @@ const AccountListHeader = ({
     />
     {searchString && (
       <div
+        data-testid="clear"
         css={clearButtonCss}
         role="button"
         onClick={() => onSearchBoxChange('')}
