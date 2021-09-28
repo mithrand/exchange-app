@@ -11,7 +11,7 @@ import { Currency } from '../../types';
 interface Props {
   from: Currency;
   to: Currency;
-  rate: number | null;
+  exchangeRate: number | null;
 }
 
 const exchangeRateCss = css({
@@ -32,11 +32,11 @@ const TO_PRECISION = 4;
 const printFrom = printCurrency(FROM_PRECISION);
 const printTo = printCurrency(TO_PRECISION);
 
-const ExchangeRate = ({ from, to, rate }: Props) => (
+const ExchangeRate = ({ from, to, exchangeRate }: Props) => (
   <div css={exchangeRateCss}>
     <ExchangeRateIcon {...iconCss} />
-    {rate && ` ${printFrom(from)(1)} = ${printTo(to)(rate)}`}
-    {!rate && 'loading'}
+    {exchangeRate && ` ${printFrom(from)(1)} = ${printTo(to)(exchangeRate)}`}
+    {!exchangeRate && 'loading'}
   </div>
 );
 

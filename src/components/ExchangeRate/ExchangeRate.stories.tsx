@@ -16,5 +16,5 @@ export const Primary = Template.bind({});
 Primary.args = {
   from: currencies.EUR,
   to: currencies.GBP,
-  rate: 1.1785130,
+  exchangeRate: 1.1785130,
 };
