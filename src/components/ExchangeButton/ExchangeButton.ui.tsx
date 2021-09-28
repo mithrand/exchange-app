@@ -45,7 +45,7 @@ const ExchangeButton = ({
   onCurrencyButtonClick,
   onQuantityChange,
 }: Props) => (
-  <div css={exchangeButtonCss(alert)}>
+  <div data-testid="exchange-button" css={exchangeButtonCss(alert)}>
     <CurrencyButton
       currency={currencyAccount.currency}
       onClick={onCurrencyButtonClick}
