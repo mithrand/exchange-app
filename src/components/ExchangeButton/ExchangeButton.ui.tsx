@@ -4,7 +4,7 @@
 import React from 'react';
 import { css, jsx } from '@emotion/react';
 import * as styles from '../../stylesContants';
-import CurrencyButton from './CurrencyButton.ui';
+import AccountButton from './AccountButton';
 import Balance from './Balance.ui';
 import QuantityInput from './QuantityInput.ui';
 import Message from './Message.ui';
@@ -17,7 +17,7 @@ export interface Props {
   message?: string;
   isNegative: boolean;
   alert: boolean;
-  onCurrencyButtonClick(): void;
+  onAccountButtonClick(): void;
   onQuantityChange(quantity: Quantity): void;
 }
 
@@ -42,13 +42,13 @@ const ExchangeButton = ({
   message,
   isNegative,
   alert,
-  onCurrencyButtonClick,
+  onAccountButtonClick,
   onQuantityChange,
 }: Props) => (
   <div data-testid="exchange-button" css={exchangeButtonCss(alert)}>
-    <CurrencyButton
+    <AccountButton
       currency={currencyAccount.currency}
-      onClick={onCurrencyButtonClick}
+      onClick={onAccountButtonClick}
     />
     <QuantityInput
       quantity={quantity}

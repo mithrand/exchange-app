@@ -54,7 +54,7 @@ describe('ConfirmationMessage', () => {
 
   it('confirmation message on buy mode', () => {
     render(<ConfirmationMessage />);
-    userEvent.click(screen.getByTestId('confiramtion-message'));
+    userEvent.click(screen.getByTestId('confirmation-message'));
     expect(MockCloseConfirmationMessageDispatcher).toBeCalled();
   });
 });

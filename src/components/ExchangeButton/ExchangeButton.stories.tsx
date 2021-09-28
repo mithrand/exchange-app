@@ -22,7 +22,7 @@ Primary.args = {
   },
   message: 'this is a message',
   quantity: 0,
-  onCurrencyButtonClick: () => {
+  onAccountButtonClick: () => {
     alert('Click on currncy button');
   },
 };

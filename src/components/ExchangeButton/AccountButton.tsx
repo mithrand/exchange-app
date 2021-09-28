@@ -13,7 +13,7 @@ interface Props {
   onClick(): void;
 }
 
-const currencyCss = css({
+const accountButtonCss = css({
   fontFamily: styles.fontFamily.main,
   display: 'inline-block',
   width: '50%',
@@ -38,11 +38,11 @@ const onKeysPress =
     }
   };
 
-const CurrencyButton = ({ currency, onClick }: Props) => (
+const AccountButton = ({ currency, onClick }: Props) => (
   <div
-    data-testid="currency-button"
+    data-testid="account-button"
     role="button"
-    css={currencyCss}
+    css={accountButtonCss}
     onClick={onClick}
     onKeyPress={onKeysPress(onClick)}
     tabIndex={0}
@@ -53,4 +53,4 @@ const CurrencyButton = ({ currency, onClick }: Props) => (
   </div>
 );
 
-export default CurrencyButton;
+export default AccountButton;
