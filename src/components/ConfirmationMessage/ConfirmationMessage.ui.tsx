@@ -71,7 +71,7 @@ const ConfirmationMessage = ({
     }}
   >
     <div
-      data-testid="confiramtion-message"
+      data-testid="confirmation-message"
       role="button"
       css={confirmationMessageCss}
       onClick={closeModal}

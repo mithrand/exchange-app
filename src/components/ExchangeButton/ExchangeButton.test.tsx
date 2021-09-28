@@ -15,12 +15,12 @@ describe('ExchangeButton', () => {
     },
     quantity: null,
     isNegative: false,
-    onCurrencyButtonClick: jest.fn(),
+    onAccountButtonClick: jest.fn(),
     onQuantityChange: jest.fn(),
   };
 
   beforeEach(() => {
-    (props.onCurrencyButtonClick as jest.Mock).mockReset();
+    (props.onAccountButtonClick as jest.Mock).mockReset();
   });
 
   describe('Currency button', () => {
@@ -31,22 +31,22 @@ describe('ExchangeButton', () => {
 
     it('fire on click', async () => {
       render(<ExchangeButton {...props} />);
-      userEvent.click(screen.getByTestId('currency-button'));
-      expect(props.onCurrencyButtonClick).toHaveBeenCalled();
+      userEvent.click(screen.getByTestId('account-button'));
+      expect(props.onAccountButtonClick).toHaveBeenCalled();
     });
 
     it('fire on enter keyPress', async () => {
       render(<ExchangeButton {...props} />);
-      fireEvent.keyPress(screen.getByTestId('currency-button'), {
+      fireEvent.keyPress(screen.getByTestId('account-button'), {
         key: '1',
         charCode: 49,
       });
-      expect(props.onCurrencyButtonClick).not.toHaveBeenCalled();
-      fireEvent.keyPress(screen.getByTestId('currency-button'), {
+      expect(props.onAccountButtonClick).not.toHaveBeenCalled();
+      fireEvent.keyPress(screen.getByTestId('account-button'), {
         key: 'Enter',
         charCode: 13,
       });
-      expect(props.onCurrencyButtonClick).toHaveBeenCalled();
+      expect(props.onAccountButtonClick).toHaveBeenCalled();
     });
   });
 

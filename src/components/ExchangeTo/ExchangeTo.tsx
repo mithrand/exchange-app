@@ -41,7 +41,7 @@ const ExchangeTo = () => {
   return (
     <ExchangeButton
       account={account}
-      onCurrencyButtonClick={openFromModal}
+      onAccountButtonClick={openFromModal}
       quantity={calculateQuantity()}
       onQuantityChange={onQuantityChange}
       isNegative={mode === ExchangeMode.buy}

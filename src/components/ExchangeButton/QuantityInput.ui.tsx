@@ -13,6 +13,11 @@ interface Props {
   isNegative: boolean;
 }
 
+const focusableCss = css({
+  display: 'inline-block',
+  width: '50%',
+});
+
 const numberFormatCss = (isEditing: boolean, quantity: Quantity) =>
   css({
     fontFamily: styles.fontFamily.main,
@@ -21,12 +26,12 @@ const numberFormatCss = (isEditing: boolean, quantity: Quantity) =>
     textAlign: 'right',
     fontWeight: 'bold',
     display: 'inline-block',
-    width: '50%',
     padding: '0px',
     outline: 'none',
     caretColor: styles.colors.blue,
     color: isEditing || quantity ? styles.colors.black : styles.colors.grey,
     backgroundColor: 'transparent',
+    float: 'right',
   });
 
 const converValueToQuantity = (values: NumberFormatValues): Quantity => {
@@ -55,24 +60,31 @@ const QuantityInput = ({ quantity, updateQuantity, isNegative }: Props) => {
     }
   };
   return (
-    <NumberFormat
-      data-testid="quantity-input"
-      decimalScale={quantity || isEditing ? 2 : 0}
-      decimalSeparator=","
-      fixedDecimalScale
-      displayType="input"
-      type="text"
-      prefix={calculatePrefix(quantity, isNegative)}
-      allowNegative={false}
-      allowLeadingZeros={false}
-      css={numberFormatCss(isEditing, quantity)}
-      thousandSeparator="."
-      defaultValue={0}
-      onValueChange={onValueChangeHandler}
+    <div
+      css={focusableCss}
+      data-testid="focusable-input"
+      role="button"
+      tabIndex={0}
       onFocus={() => setIsEditing(true)}
       onBlur={() => setIsEditing(false)}
-      {...(!isEditing ? { value: quantity } : {})}
-    />
+    >
+      <NumberFormat
+        data-testid="quantity-input"
+        decimalScale={quantity || isEditing ? 2 : 0}
+        decimalSeparator=","
+        fixedDecimalScale
+        displayType="input"
+        type="text"
+        prefix={calculatePrefix(quantity, isNegative)}
+        allowNegative={false}
+        allowLeadingZeros={false}
+        css={numberFormatCss(isEditing, quantity)}
+        thousandSeparator="."
+        defaultValue={0}
+        onValueChange={onValueChangeHandler}
+        {...(!isEditing ? { value: quantity } : {})}
+      />
+    </div>
   );
 };
 
