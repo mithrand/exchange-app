@@ -1,29 +1,21 @@
 import React from 'react';
 import {
-  useExchangeRates,
+  useExchangeRate,
   useFromAccount,
   useToAccount,
 } from '../../store/selectors';
-import { calculateExchageRate } from '../../utils';
 
 import ExchangeRate from './ExchangeRate.ui';
 
 const ExchangeRateContainer = () => {
-  const exchangeRate = useExchangeRates();
   const accountFrom = useFromAccount();
   const accountTo = useToAccount();
-  const rate = exchangeRate
-    ? calculateExchageRate(
-        exchangeRate,
-        accountFrom.currency,
-        accountTo.currency,
-      )
-    : null;
+  const rate = useExchangeRate();
   return (
     <ExchangeRate
       from={accountFrom.currency}
       to={accountTo.currency}
-      rate={rate}
+      exchangeRate={rate}
     />
   );
 };
